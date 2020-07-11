@@ -1,0 +1,41 @@
+<body id="index">
+  
+  <!-- header始まり -->
+  <header>
+    <div class="logo">
+      <a href="/"><img src="assets/logo5.png" alt="SNAPPERS"></a>
+    </div>
+    <nav>
+      <ul class="global-nav">
+        <% if user_signed_in? %>
+          <li><%= current_user.nickname %></li>
+          <li id="store"><a href="/tweets/tweet">Store</a></li>
+          <li id="store"><a href="/tweets/new">New</a></li>
+          <li><%= link_to "MyPage", "/users/#{current_user.id}" %></li>
+          <li><%= link_to "LogOut", destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to "LogIn", new_user_session_path, class: 'post' %></li>
+          <li><%= link_to "NewUser", new_user_registration_path, class: 'post' %></li>
+        <% end %>
+      </ul>
+    </nav>
+  </header>
+  <!-- header終わり -->
+  
+  <!-- wrap始まり -->
+  <div id="wrap">
+    <div class="content">
+      <h1>No shopping No life, Let's go to Town!!</h1>
+      <p>このWebサイトは、学習用サンプルとして作成する「K Style Lab」という架空の写真投稿＆ポートフォリオサイトです。<br></p>
+      <p class="btn"><a href="/tweets/portfolio">My Portfolio</a></p>
+    </div>
+  </div>
+  <!-- wrap終わり -->
+  
+  <!-- footer始まり -->
+  <footer>
+    <small>(C)2017 Hattori-studio.</small>
+  </footer>
+  <!-- footer終わり -->
+  
+</body>

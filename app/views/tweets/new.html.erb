@@ -1,0 +1,59 @@
+<body id="contact">
+  
+  <!-- header始まり -->
+  <header>
+    <div class="logo">
+      <a href="/"><img src="/assets/logo5.png" alt="SNAPPERS"></a>
+    </div>
+    <nav>
+      <ul class="global-nav">
+        <% if user_signed_in? %>
+          <li><%= current_user.nickname %></li>
+          <li id="store"><a href="/tweets/tweet">Store</a></li>
+          <li id="store"><a href="/tweets/new">New</a></li>
+          <li><%= link_to "MyPage", "/users/#{current_user.id}" %></li>
+          <li><%= link_to "LogOut", destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to "LogIn", new_user_session_path, class: 'post' %></li>
+          <li><%= link_to "NewUser", new_user_registration_path, class: 'post' %></li>
+        <% end %>
+      </ul>
+    </nav>
+  </header>
+  <!-- header終わり -->
+  
+  <!-- wrap始まり -->
+  <div id="wrap" class="clearfix">
+    <div class="content">
+      <div class="main">
+        <div class="contents row">
+          <div class="container">
+            <%= form_with(model: @tweet, local: true) do |form| %>
+              <h3>
+                投稿する
+              </h3>
+              <%= form.text_area :name, placeholder: "name" , rows: "1" %>
+              <%= form.text_area :text, placeholder: "perfecture" , rows: "1" %>
+              <%= form.text_area :adress, placeholder: "adress" , rows: "1" %>
+              <%= form.text_field :image, placeholder: "Image Url" %>
+              
+              <%= form.submit "SEND" %>
+            <% end %>
+            <%= form_tag import_tweets_path, multipart: true do %>
+              <%= file_field_tag :file %>
+              <%= submit_tag "インポート" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- wrap終わり -->
+  
+  <!-- footer始まり -->
+  <footer>
+    <small>(C)2017 Hattori-studio.</small>
+  </footer>
+  <!-- footer終わり -->
+  
+</body>

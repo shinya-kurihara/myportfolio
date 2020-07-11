@@ -1,0 +1,51 @@
+<body id="portfolio">
+  
+  <!-- header始まり -->
+  <header>
+    <div class="logo">
+      <a href="/"><img src="/assets/logo5.png" alt="SNAPPERS"></a>
+    </div>
+    <nav>
+      <ul class="global-nav">
+        <% if user_signed_in? %>
+          <li><%= current_user.nickname %></li>
+          <li id="store"><a href="/tweets/tweet">Store</a></li>
+          <li id="store"><a href="/tweets/new">New</a></li>
+          <li><%= link_to "MyPage", "/users/#{current_user.id}" %></li>
+          <li><%= link_to "LogOut", destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to "LogIn", new_user_session_path, class: 'post' %></li>
+          <li><%= link_to "NewUser", new_user_registration_path, class: 'post' %></li>
+        <% end %>
+      </ul>
+    </nav>
+  </header>
+  <!-- header終わり -->
+  
+  <!-- wrap始まり -->
+  <div id="wrap" class="clearfix">
+    <div class="content">
+      <div class="main_show">
+        <h1><%= link_to "Store Search", "/tweets/tweet" %></h1>
+          <h2><%= @tweet.name %></h2>
+          <div class="content_post_show" style="background-image: url(<%= @tweet.image %>);">
+          </div>
+          <div class="name">
+            <%= simple_format(@tweet.adress) %>
+            <%= @tweet.area  %>㎡<br>
+            <a href="/users/<%= @tweet.user.id %>">
+              <span>投稿者</span><%= @tweet.user.nickname %>
+            </a>
+          </div>
+      </div>
+    </div>
+  </div>
+  <!-- wrap終わり -->
+  
+  <!-- footer始まり -->
+  <footer>
+    <small>(C)2017 Hattori-studio.</small>
+  </footer>
+  <!-- footer終わり -->
+  
+</body>
